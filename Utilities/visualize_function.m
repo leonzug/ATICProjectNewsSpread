@@ -1,5 +1,5 @@
-function visualize_function(A,X,duration,nfigure,step_size)
-    G = digraph(A);
+function visualize_function(A,X,nodenames,duration,nfigure,step_size)
+    G = digraph(A,nodenames);
     bins = conncomp(G);
     %figure(nfigure)
     delay = 0.00000001; % in [s]
