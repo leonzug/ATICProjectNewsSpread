@@ -36,8 +36,6 @@ for i = 1:nPeople
     end
 end
 if infl_index > 0
-    infl_index
-    people
     A = A + diag(people(:,infl_index));
 end
 
@@ -49,7 +47,7 @@ for i=1:nRealNews
     A(RealSources(i,1), :) = A(RealSources(i,1), :)*0;
     A(RealSources(i,1), RealSources(i,1)) = 1;
 end
-sum(A,2)
+sum(A,2);
 A = A./(ones(nPeople,1)*sum(A,2)')';
 
 end
