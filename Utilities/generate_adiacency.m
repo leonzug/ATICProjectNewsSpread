@@ -1,22 +1,18 @@
 function [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews)
 
-% 
+% Settable Parameters: 
+% P(connection between node i and node j) = C / (distance(i,j))^(1/nRoot)
+C = 0.5;
+nRoot = 2;
+
+% Implicit Parameters
 nPeople = size(people,1);
 A = zeros(nPeople, nPeople);
 nTraits=length(traits);
-FakeSources = randi(nPeople,nFakeNews,1);
-RealSources = randi(nPeople,nRealNews,1);
+permutations = randperm(nPeople,nFakeNews + nRealNews)';
+FakeSources = permutations(1:nFakeNews,1);
+RealSources = permutations((nFakeNews+1):(nFakeNews+nRealNews),1);
 infl_index = 0;
-
-% pairs =[];
-% for 
-%             
-%         end
-%     end
-% end
-% initial network
-C = 0.5;
-nRoot = 2;
 
 for i = 1:nPeople
     for j = (i+1):nPeople
