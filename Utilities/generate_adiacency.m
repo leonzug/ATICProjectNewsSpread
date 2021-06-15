@@ -6,6 +6,7 @@ A = zeros(nPeople, nPeople);
 nTraits=length(traits);
 FakeSources = randi(nPeople,nFakeNews,1);
 RealSources = randi(nPeople,nRealNews,1);
+infl_index = 0;
 
 % pairs =[];
 % for 
@@ -14,12 +15,12 @@ RealSources = randi(nPeople,nRealNews,1);
 %     end
 % end
 % initial network
-C = 0.3;
+C = 0.5;
 nRoot = 2;
 
 for i = 1:nPeople
     for j = (i+1):nPeople
-        distance = min(abs(j-i), abs(nPeople-j));
+        distance = min(abs(j-i), abs(nPeople-i));
         u = rand;
         if u < C/nthroot(distance, nRoot)
             A(i,j) = 1;
@@ -32,12 +33,18 @@ for i = 1:nPeople
                     A(j,i) = A(j,i)/abs(k_j-k_i);
                 end
                 if strcmp(traits(k), 'influenceable')
-                    A(i,:) = k_i*A(i,:);
+                    infl_index = k;
                 end
             end
         end
     end
 end
+if infl_index > 0
+    infl_index
+    people
+    A = A + diag(people(:,infl_index));
+end
+
 for i=1:nFakeNews
     A(FakeSources(i,1), :) = A(FakeSources(i,1), :)*0;
     A(FakeSources(i,1),FakeSources(i,1)) = 1;
@@ -46,6 +53,7 @@ for i=1:nRealNews
     A(RealSources(i,1), :) = A(RealSources(i,1), :)*0;
     A(RealSources(i,1), RealSources(i,1)) = 1;
 end
-
+sum(A,2)
 A = A./(ones(nPeople,1)*sum(A,2)')';
+
 end
