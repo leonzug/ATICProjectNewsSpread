@@ -9,8 +9,9 @@ nRoot = 2;
 nPeople = size(people,1);
 A = zeros(nPeople, nPeople);
 nTraits=length(traits);
-FakeSources = randperm(nPeople,nFakeNews)';
-RealSources = randperm(nPeople,nRealNews)';
+permutations = randperm(nPeople,nFakeNews + nRealNews)';
+FakeSources = permutations(1:nFakeNews,1);
+RealSources = permutations((nFakeNews+1):(nFakeNews+nRealNews),1);
 infl_index = 0;
 
 for i = 1:nPeople
