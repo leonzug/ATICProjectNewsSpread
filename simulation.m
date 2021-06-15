@@ -5,9 +5,10 @@ timesteps = 1000;
 %X = ...;X
 traits = {'similarity', 'influenceable'};
 distr = {{'uniform',[0,1]}, {'uniform',[0,1]}}
+nRealNews = 0;
+nFakeNews = 1;
 
-
-[A,people,FakeSources, RealSources,x0] = generate_society (N,traits, distr);
+[A,people,FakeSources, RealSources,x0] = generate_society (N,traits, distr, nRealNews, nFakeNews);
 
 [X] = spread_news(timesteps, A, x0);
 

@@ -1,4 +1,4 @@
-function [A,people,FakeSources, RealSources,x0] = generate_society (nPeople,traits, distr)
+function [A,people,FakeSources, RealSources,x0] = generate_society (nPeople,traits, distr, nRealNews, nFakeNews)
 
 nTraits=length(traits);
 people = zeros(nPeople,nTraits);
@@ -6,9 +6,6 @@ people = zeros(nPeople,nTraits);
 for i=1:nTraits
     people(:,i) = random_distribution(nPeople,distr{i});
 end
-
-nRealNews = 0;
-nFakeNews = 1;
 
 [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews);
 
