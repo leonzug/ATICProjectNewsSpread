@@ -36,8 +36,6 @@ for i = 1:nPeople
     end
 end
 if infl_index > 0
-    infl_index
-    people
     A = A + diag(people(:,infl_index));
 end
 
