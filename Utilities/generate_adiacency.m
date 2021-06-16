@@ -1,4 +1,4 @@
-function [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews)
+function [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews, newsRange, locality)
 
 % Settable Parameters: 
 % P(connection between node i and node j) = C / (distance(i,j))^(1/nRoot)
@@ -6,12 +6,10 @@ C = 0.5;
 nRoot = 2;
 
 % Implicit Parameters
+div_coeff = [1,1]; % 1/(div_coeff(i)+parameter) 1: similarity, 2: critical thinking
 nPeople = size(people,1);
 A = zeros(nPeople, nPeople);
 nTraits=length(traits);
-permutations = randperm(nPeople,nFakeNews + nRealNews)';
-FakeSources = permutations(1:nFakeNews,1);
-RealSources = permutations((nFakeNews+1):(nFakeNews+nRealNews),1);
 infl_index = 0;
 
 for i = 1:nPeople
@@ -25,29 +23,60 @@ for i = 1:nPeople
                 k_i = people(i,k);
                 k_j = people(j,k);
                 if strcmp(traits(k), 'similarity')
-                    A(i,j) = A(i,j)/abs(k_i-k_j);
-                    A(j,i) = A(j,i)/abs(k_j-k_i);
+                    A(i,j) = A(i,j)/(div_coeff(1)+abs(k_i-k_j));
+                    A(j,i) = A(j,i)/(div_coeff(1)+abs(k_j-k_i));
                 end
                 if strcmp(traits(k), 'influenceable')
                     infl_index = k;
+                end
+                if strcmp(traits(k), 'critical thinker')
+                    crit_index = k;
                 end
             end
         end
     end
 end
 if infl_index > 0
-    A = A + diag(1./people(:,infl_index));
+    A = A + diag(1./(div_coeff(2)+people(:,infl_index)));
 end
 
+A = [A, zeros(nPeople, nRealNews + nFakeNews)];
+A = [A; zeros(nRealNews + nFakeNews, nPeople + nRealNews + nFakeNews)];
+A = A + diag([zeros(nPeople,1); ones(nFakeNews+nRealNews,1)]);
+
 for i=1:nFakeNews
-    A(FakeSources(i,1), :) = A(FakeSources(i,1), :)*0;
-    A(FakeSources(i,1),FakeSources(i,1)) = 1;
+    if locality(1)
+        val = randi(nPeople);
+        for z=1:newsRange(1)
+            idx = mod(val+z,nPeople)+1;
+            A(idx,nPeople+i) = 1-people(idx,crit_index);
+        end
+    else
+        targets = randperm(nPeople, newsRange(1),1);
+        for z=1:newsRange(1)
+            A(targets(z,1),nPeople+i) = 1-people(targets(z,1),crit_index);
+        end
+    end
 end
+
 for i=1:nRealNews
-    A(RealSources(i,1), :) = A(RealSources(i,1), :)*0;
-    A(RealSources(i,1), RealSources(i,1)) = 1;
+    if locality(2)
+        val = randi(nPeople);
+        for z=1:newsRange(2)
+            idx = mod(val+z,nPeople)+1;
+            A(idx,nPeople+nFakeNews+i) = people(idx,crit_index);
+        end
+    else
+        targets = randperm(nPeople, newsRange(1),1);
+        for z=1:newsRange(2)
+            A(targets(z,1),nPeople+nFakeNews+i) = people(targets(z,1),crit_index);
+        end
+    end
 end
-sum(A,2);
-A = A./(ones(nPeople,1)*sum(A,2)')';
+
+A = A./(ones(nPeople+nFakeNews+nRealNews,1)*sum(A,2)')';
+
+FakeSources = [(nPeople+1):(nPeople+nFakeNews)]';
+RealSources = [(nPeople+nFakeNews+1):(nPeople+nFakeNews+nRealNews)]';
 
 end
