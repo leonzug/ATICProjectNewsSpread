@@ -3,7 +3,7 @@ X_shifted = circshift ( X , [0,1]);
 dX = X-X_shifted;
 dX = dX(:,2:end);
 dX = sum(abs(dX),1);
-WhenSteadyState = find(dX < tol);
+WhenSteadyState = find(dX <= tol*size(X,1));
 if isempty(WhenSteadyState) == true
     WhenSteadyState = 'never reached';
     isSteadyState = 'False';
