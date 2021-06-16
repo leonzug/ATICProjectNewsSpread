@@ -1,9 +1,7 @@
-function [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews, newsRange, locality)
+function [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews, newsRange, locality, C, nRoot)
 
 % Settable Parameters: 
 % P(connection between node i and node j) = C / (distance(i,j))^(1/nRoot)
-C = 0.5;
-nRoot = 2;
 
 % Implicit Parameters
 div_coeff = [1,1]; % 1/(div_coeff(i)+parameter) 1: similarity, 2: critical thinking
