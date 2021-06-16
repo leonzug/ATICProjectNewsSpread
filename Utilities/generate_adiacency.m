@@ -36,7 +36,7 @@ for i = 1:nPeople
     end
 end
 if infl_index > 0
-    A = A + diag(people(:,infl_index));
+    A = A + diag(1./people(:,infl_index));
 end
 
 for i=1:nFakeNews
