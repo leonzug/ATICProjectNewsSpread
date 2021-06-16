@@ -1,5 +1,6 @@
-function visualize_function(A,X,nodenames,duration,nfigure,step_size)
+function [average_indegree] = visualize_function(A,X,nodenames,duration,nfigure,step_size)
     G = digraph(A,nodenames);
+    average_indegree = mean(indegree(G));
     bins = conncomp(G);
     %figure(nfigure)
     delay = 0.00000001; % in [s]

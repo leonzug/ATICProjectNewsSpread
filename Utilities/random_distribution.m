@@ -8,6 +8,8 @@ elseif or(strcmp(distr{1},'gaussian_discrete'),strcmp(distr{1},'gaussian'))
     if strcmp(distr{1},'gaussian_discrete')
         x = round(x);
     end
+elseif strcmp(distr{1},'fixed')
+    x=ones(N,1)*distr{2};
 end
 
 end
