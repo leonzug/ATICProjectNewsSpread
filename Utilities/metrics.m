@@ -1,4 +1,7 @@
-function [evaluation] = metrics(X, metric, instances, nfigure)
+function [evaluation] = metrics(X, metric, instances, nfigure,RealSources,FakeSources)
+
+X(RealSources,:)=[];
+X(FakeSources,:)=[];
 
 if or(or(strcmp(metric,'avg'),strcmp(metric,'average')),strcmp(metric,'mean'))
     evaluation = zeros(instances,1);

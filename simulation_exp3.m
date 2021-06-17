@@ -1,15 +1,15 @@
 addpath('Utilities');
+clear all;
 
 N = 100;
 timesteps = 600;
-nExperiments = 2;
+nExperiments = 100;
 traits = {'similarity', 'influenceable','critical thinker'};
 nRealNews = 2;
 nFakeNews = 2;
 
 step_size = 100;
 tol = 0.000001;
-
 C = 0.2;
 nRoot = 4;
 
@@ -18,31 +18,47 @@ nRoot = 4;
 % index 1: Fake News; index 2: Real News.
 newsRange = round([0.1, 0.1]*N);
 locality = [true, true];
-instruction_level = 0:0.1:1;
-averages = zeros(size(instruction_level,2),1);
-for k=1:size(instruction_level,2)
+influenceability_level = 0:0.1:1;
+averages = zeros(size(influenceability_level,2),1);
+stds = zeros(size(influenceability_level,2),1);
+t_steady = zeros(size(influenceability_level,2),1);
+i_avg = zeros(size(influenceability_level,2),1);
+for k=1:size(influenceability_level,2)
     i = 0;
     X_average = 0;
-    distr = {{'uniform',[0,1]}, {'uniform',[0,1]}, {'beta',instruction_level(k)}};
+    std_average = 0;
+    steadystate = 0;
+    connectivity_avg = 0;
+    distr = {{'uniform',[0,1]}, {'beta',influenceability_level(k)}, {'uniform',[0,1]}};
     while i<nExperiments
         [A,people,FakeSources, RealSources,x0,nodenames] = generate_society (N,traits, distr, nRealNews, nFakeNews, newsRange, locality, C, nRoot);
         [X] = spread_news(timesteps, A, x0);
         [isSteadyState,WhenSteadyState] = is_steady_state(X,tol);
+        [average_indegree] = visualize_function(A,X',nodenames,timesteps,k+20,step_size,false,false);
         if isSteadyState
             i = i + 1;
-            instance_average = metrics(X, 'avg', 10, 2);
+            instance_average = metrics(X, 'avg', 10, 2,RealSources,FakeSources);
+            instance_std = metrics(X, 'std', 10, 2,RealSources,FakeSources);
             X_average = X_average + instance_average(end);
+            std_average = std_average + instance_std(end);
+            steadystate = steadystate + WhenSteadyState;
+            connectivity_avg = connectivity_avg + average_indegree;
         else
             disp("Instance " + i + "did not reach steady state");
         end
     end
+    stds(k) = std_average/nExperiments;
     averages(k) = X_average/nExperiments;
-    [average_indegree] = visualize_function(A,X',nodenames,timesteps,1,step_size,false);
+    t_steady(k) = steadystate/nExperiments;
+    i_avg(k) = connectivity_avg/nExperiments;
+
 end
 figure;
-plot(intruction_level,averages);
-title("Instruction Level vs Averages")
-
+plot(influenceability_level,averages);
+title("influenceability level vs Averages")
+figure;
+plot(influenceability_level,stds);
+title("influenceability Level vs Stds")
 %degree = 2;
 %perturbation = 'censorship';
 
