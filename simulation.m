@@ -1,10 +1,10 @@
 addpath('Utilities');
 
-N = 100;
+N = 1000;
 timesteps = 600;
-
+nExperiments = 25;
 traits = {'similarity', 'influenceable','critical thinker'};
-distr = {{'fixed',0.5}, {'fixed',0.5}, {'fixed',0.5}};
+distr = {{'uniform',[0,1]}, {'uniform',[0,1]}, {'uniform',[0,1]}};
 nRealNews = 2;
 nFakeNews = 2;
 
@@ -20,19 +20,29 @@ nRoot = 4;
 newsRange = round([0.1, 0.1]*N);
 locality = [true, true];
 
-[A,people,FakeSources, RealSources,x0,nodenames] = generate_society (N,traits, distr, nRealNews, nFakeNews, newsRange, locality, C, nRoot);
+i = 0;
+X_average = 0;
+while i<nExperiments
+    [A,people,FakeSources, RealSources,x0,nodenames] = generate_society (N,traits, distr, nRealNews, nFakeNews, newsRange, locality, C, nRoot);
+    [X] = spread_news(timesteps, A, x0);
+    [isSteadyState,WhenSteadyState] = is_steady_state(X,tol);
+    if isSteadyState
+        i = i + 1;
+        instance_average = metrics(X, 'avg', 10, 2);
+        X_average = X_average + instance_average(end);
+    else
+        disp("Instance " + i + "did not reach steady state");
+    end
+end
+X_average = X_average/nExperiments
 
-[X] = spread_news(timesteps, A, x0);
-[isSteadyState,WhenSteadyState] = is_steady_state(X,tol);
-%eval = metrics (X,'hyst', 20,2);
-eval2 = metrics (X,'mean', 10,2);
 
 %degree = 2;
 %perturbation = 'censorship';
 
-X_average = metrics(X, 'avg', 10, 2)
+
 X_average = X_average(end);
-[average_indegree] = visualize_function(A,X',nodenames,timesteps,1,step_size);
+%[average_indegree] = visualize_function(A,X',nodenames,timesteps,1,step_size);
 %G = digraph(A,nodenames);
 %average_indegree = mean(indegree(G));
 
