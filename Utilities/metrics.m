@@ -14,4 +14,10 @@ if or(or(strcmp(metric,'hyst'),strcmp(metric,'peaks')),strcmp(metric,'hystogram'
     evaluation =[];
 end
     
-    
+if or(strcmp(metric,'std'),strcmp(metric,'standard deviation'))
+    evaluation = zeros(instances,1);
+    step = floor(size(X,2)/instances);
+    for i=1:instances
+        evaluation(i) = std(X(:,step*i));
+    end
+end
