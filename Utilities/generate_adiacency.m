@@ -35,7 +35,7 @@ for i = 1:nPeople
     end
 end
 if infl_index > 0
-    A = A + diag(1./(div_coeff(2)+people(:,infl_index)));
+    A = A + 10*diag(1./(div_coeff(2)+people(:,infl_index)));
 end
 
 A = [A, zeros(nPeople, nRealNews + nFakeNews)];

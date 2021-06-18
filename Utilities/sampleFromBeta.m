@@ -1,4 +1,5 @@
 function [x] = sampleFromBeta(N, instruction_level)
+pl = false;
 if instruction_level <= 1 && instruction_level >= 0
     instruction_level = -(6*instruction_level-3);
     instruction_factor = 2^abs(instruction_level);
@@ -15,12 +16,13 @@ if instruction_level <= 1 && instruction_level >= 0
 
     X = 0:0.01:1;
     y = betapdf(X,a,b);
-
-    %figure
-    plot(X,y,'Color','r','LineWidth',2)
-    hold on
-    legend({"a = " + a + " b = " + b},'Location','NorthEast');
-    hold off
+    if pl
+        figure
+        plot(X,y,'Color','r','LineWidth',2)
+        hold on
+        legend({"a = " + a + " b = " + b},'Location','NorthEast');
+        hold off
+    end
 
     x = betarnd(a,b,N,1);
 else
