@@ -10,20 +10,24 @@ end
 
 [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews, newsRange, locality, C, nRoot);
 
-nPeople = size(A,1);
-x0 = zeros(nPeople,1);
+nNodes = size(A,1);
+x0 = zeros(nNodes,1);
 for i=1:nRealNews
     x0(RealSources(i))=1;
 end
 for i=1:nFakeNews
     x0(FakeSources(i))=-1;
 end
-for j=1:nPeople
+counter_real = 1;
+counter_fake = 1;
+for j=1:nNodes
     if any(RealSources==j)
-        nodenames = [nodenames,"Real Source" + j];
+        nodenames = [nodenames,"Real Source " + (counter_real)];
+        counter_real= counter_real+1;
         continue;
     elseif any(FakeSources==j)
-        nodenames = [nodenames,"Fake Source"+j];
+        nodenames = [nodenames,"Fake Source "+(counter_fake)];
+        counter_fake= counter_fake+1;
         continue;
     end
     nodenames = [nodenames, j];
