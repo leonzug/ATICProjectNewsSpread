@@ -9,26 +9,27 @@ nPeople = size(people,1);
 A = zeros(nPeople, nPeople);
 nTraits=length(traits);
 infl_index = 0;
-
-for i = 1:nPeople
-    for j = (i+1):nPeople
-        distance = min(abs(j-i), abs(nPeople-i));
-        u = rand;
-        if u < C/nthroot(distance, nRoot)
-            A(i,j) = 1;
-            A(j,i) = A(i,j);
-            for k=1:nTraits
+for k=1:nTraits
+    if strcmp(traits(k), 'influenceable')
+        infl_index = k;
+        continue;
+    end
+    if strcmp(traits(k), 'critical thinker')
+        crit_index = k;
+        continue;
+    end
+    for i = 1:nPeople
+        for j = (i+1):nPeople
+            distance = min(abs(j-i), abs(nPeople-i));
+            u = rand;
+            if u < C/nthroot(distance, nRoot)
+                A(i,j) = 1;
+                A(j,i) = A(i,j);
                 k_i = people(i,k);
                 k_j = people(j,k);
                 if strcmp(traits(k), 'similarity')
                     A(i,j) = A(i,j)/(div_coeff(1)+abs(k_i-k_j));
                     A(j,i) = A(j,i)/(div_coeff(1)+abs(k_j-k_i));
-                end
-                if strcmp(traits(k), 'influenceable')
-                    infl_index = k;
-                end
-                if strcmp(traits(k), 'critical thinker')
-                    crit_index = k;
                 end
             end
         end
@@ -71,9 +72,11 @@ for i=1:nRealNews
         end
     end
 end
-
+disp('before norm')
+A
 A = A./(ones(nPeople+nFakeNews+nRealNews,1)*sum(A,2)')';
-
+disp('after norm')
+A
 FakeSources = [(nPeople+1):(nPeople+nFakeNews)]';
 RealSources = [(nPeople+nFakeNews+1):(nPeople+nFakeNews+nRealNews)]';
 
