@@ -2,7 +2,7 @@ addpath('Utilities');
 clear all;
 
 N = 100;
-timesteps = 600;
+timesteps = 1000;
 nExperiments = 100;
 traits = {'similarity', 'influenceable','critical thinker'};
 nRealNews = 2;
@@ -22,7 +22,7 @@ instruction_level = 0:0.1:1;
 averages = zeros(size(instruction_level,2),1);
 stds = zeros(size(instruction_level,2),1);
 t_steady = zeros(size(instruction_level,2),1);
-i_avg = zeros(size(instruction_level,2),1);;
+i_avg = zeros(size(instruction_level,2),1);
 for k=1:size(instruction_level,2)
     i = 0;
     X_average = 0;
@@ -44,7 +44,7 @@ for k=1:size(instruction_level,2)
             steadystate = steadystate + WhenSteadyState;
             connectivity_avg = connectivity_avg + average_indegree;
         else
-            disp("Instance " + i + "did not reach steady state");
+            disp("Instance " + i + " did not reach steady state");
         end
     end
     stds(k) = std_average/nExperiments;
