@@ -72,11 +72,8 @@ for i=1:nRealNews
         end
     end
 end
-disp('before norm')
-A
+
 A = A./(ones(nPeople+nFakeNews+nRealNews,1)*sum(A,2)')';
-disp('after norm')
-A
 FakeSources = [(nPeople+1):(nPeople+nFakeNews)]';
 RealSources = [(nPeople+nFakeNews+1):(nPeople+nFakeNews+nRealNews)]';
 
