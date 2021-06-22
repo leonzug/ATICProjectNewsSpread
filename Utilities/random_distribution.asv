@@ -12,7 +12,7 @@ elseif strcmp(distr{1},'fixed')
     x=ones(N,1)*distr{2};
 elseif strcmp(distr{1},'polar')
     division = floor(N*distr{2});
-    x=[ones(division,1);zeros(N-division,1)];
+    x=[ones(division,1);(zeros(N-;
 end
 
 end

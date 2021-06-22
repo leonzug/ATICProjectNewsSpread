@@ -44,13 +44,13 @@ A = A + diag([zeros(nPeople,1); ones(nFakeNews+nRealNews,1)]);
 
 for i=1:nFakeNews
     if locality(1)
-        val = randi(floor(nPeople*0.1))+floor(nPeople*0.2);
+        val = randi(floor(nPeople/2));
         for z=1:newsRange(1)
             idx = mod(val+z,nPeople)+1;
             A(idx,nPeople+i) = 1-people(idx,crit_index);
         end
     else
-        targets = (randperm(nPeople))';
+        targets = randperm(nPeople, newsRange(1),1);
         for z=1:newsRange(1)
             A(targets(z,1),nPeople+i) = 1-people(targets(z,1),crit_index);
         end
@@ -59,13 +59,13 @@ end
 
 for i=1:nRealNews
     if locality(2)
-        val = randi(floor(nPeople*0.1))+floor(nPeople*0.7);
+        val = randi(floor(nPeople/3))+floor(nPeople/2);
         for z=1:newsRange(2)
             idx = mod(val+z,nPeople)+1;
             A(idx,nPeople+nFakeNews+i) = people(idx,crit_index);
         end
     else
-        targets = (randperm(nPeople))';
+        targets = randperm(nPeople, newsRange(1),1);
         for z=1:newsRange(2)
             A(targets(z,1),nPeople+nFakeNews+i) = people(targets(z,1),crit_index);
         end

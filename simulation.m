@@ -1,18 +1,18 @@
 addpath('Utilities');
 
-N = 100;
-timesteps = 600;
+N = 50;
+timesteps = 400;
 
 traits = {'similarity', 'influenceable','critical thinker'};
-distr = {{'fixed',0.5}, {'fixed',0.5}, {'fixed',0.5}};
-nRealNews = 2;
-nFakeNews = 2;
+distr = {{'polar',0.5}, {'fixed',0.2}, {'fixed',0.5}};
+nRealNews = 4;
+nFakeNews = 4;
 
 step_size = 100;
 tol = 0.000001;
 
-C = 0.2;
-nRoot = 4;
+C = 0.5;
+nRoot = 2;
 
 % newsRange: how many people does a news reach. 
 % locality: is the news local or homogeneously spread.
@@ -24,7 +24,7 @@ locality = [true, true];
 
 [X] = spread_news(timesteps, A, x0);
 [isSteadyState,WhenSteadyState] = is_steady_state(X,tol);
-%eval = metrics (X,'hyst', 20,2);
+eval = metrics (X,'hyst', 20,2);
 eval2 = metrics (X,'mean', 10,2);
 
 %degree = 2;
