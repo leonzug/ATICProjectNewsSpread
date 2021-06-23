@@ -15,7 +15,7 @@ function [average_indegree] = visualize_function(A,X,nodenames,duration,nfigure,
                 if mod(i,step_size)==0
                     figure(nfigure)
                     p=plot(G,'EdgeLabel',round(G.Edges.Weight,1), 'Marker', 'o', 'MarkerSize', 12,'NodeCData',X(i,:),'NodeColor', 'flat'); 
-                    title("iterazione: "+ i)
+                    title("Iteration: "+ i)
                     colorbar;
                     caxis([-1 1]);
                     pause(delay);
