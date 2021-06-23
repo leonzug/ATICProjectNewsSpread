@@ -2,7 +2,7 @@ addpath('Utilities');
 clear all;
 
 N = 100;
-timesteps = 1000;
+timesteps = 5000;
 nExperiments = 100;
 traits = {'similarity', 'influenceable','critical thinker'};
 nRealNews = 2;
