@@ -60,6 +60,7 @@ figure(1)
 plot3(T.C, T.nRoot, T.mean,'o');
 grid on
 hold on
+plot3(F.C, F.nRoot, F.mean,'o');
 title('Polarization Experiment: mean');
 xlabel('C');
 ylabel('nRoot');
@@ -74,7 +75,7 @@ title('Polarization Experiment: standard deviation');
 xlabel('C');
 ylabel('nRoot');
 zlabel('Opinion Standard Deviation');
-legend('local news', 'spread news')
+%legend('local news', 'spread news')
 
 figure(3)
 plot3(T.C, T.nRoot, T.R2,'o');

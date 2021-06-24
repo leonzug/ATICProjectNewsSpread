@@ -19,13 +19,13 @@ nRoot = 4;
 % locality: is the news local or homogeneously spread.
 % index 1: Fake News; index 2: Real News.
 newsRange = round([0.1, 0.1]*N);
-locality = [false, false];
+locality = [true, true];
 
 
 [A,people,FakeSources, RealSources,x0,nodenames] = generate_society_pol (N,traits, distr, nRealNews, nFakeNews, newsRange, locality, C, nRoot);
 [X] = spread_news(timesteps, A, x0);
 [isSteadyState,WhenSteadyState] = is_steady_state(X,tol);
-[average_indegree] = visualize_function(A,X',nodenames,timesteps,1,step_size,true,true);
+[average_indegree] = visualize_function(A,X',nodenames,timesteps,1,step_size,false,true);
 
 %eval = metrics(X(:,end),'hyst',20,2);
 figure(2)
