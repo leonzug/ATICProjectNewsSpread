@@ -24,7 +24,7 @@ function [average_indegree] = visualize_function(A,X,nodenames,duration,nfigure,
             end
         else
             figure(nfigure)
-            p=plot(G, 'Marker', 'o', 'MarkerSize', 12,'NodeCData',X(end,:),'NodeColor', 'flat'); 
+            p=plot(G,'EdgeLabel',round(G.Edges.Weight,1), 'Marker', 'o', 'MarkerSize', 12,'NodeCData',X(end,:),'NodeColor', 'flat'); 
             title("Solution at final step")
             colorbar;
             caxis([-1 1]);
