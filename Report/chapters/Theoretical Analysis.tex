@@ -1,6 +1,6 @@
 \section{Theoretical Analysis}
 \subsection{General Considerations}
-Without loss of generality, the labels of the nodes in the graph can be selected so that the indices referring to the fake/real news sources appear to be the last ones. Considering $n_{People}$ as the number of people in the network, $n_{Sources}$ as the number of fake and real news sources and $n=n_{People} + n_{Sources}$ as the number or rows/columns of A, the matrix A can be then partitioned as illustrated in the following:
+Without loss of generality, the labels of the nodes in the graph can be selected so that the indices referring to the fake/real news sources appear to be the last ones. Considering $n_{People}$ as the number of people in the network and $n_{Sources}$ as the number of fake and real news sources, the matrix A can be then partitioned as illustrated in the following:
 
 $$
 A = 
@@ -60,7 +60,7 @@ According to theorem 5.2 from the lecture notes, for a row-stochastic matrix A w
 	$
 	where $z_{i,p},\ p\in\{1,...,n_{Sources}\}$, are convex combination coefficients and $z_{i,p} > 0$ if and only if there exists a directed path from node i to the sink p. This is always true for the individuals in this case making $z_{i,p} > 0\ \forall\ p \in \{1,...,n_{Sources}\}$ and $i \in \{1,...,n_{People}\}$.
 \end{enumerate}
-The third statement for the treated scenario implies $(w^p)^T = (0_{1 \times n_{People}},\ 0_{1 \times (p-1)},\ 1,\ 0_{1 \times (n_{Sources}-p)})$. This is because there is only one node in each sink p. The index referring to that node is therefore the only one different from zero in $w^p$. $1_n^Tw=1$ enforces then its value to be exactly equal to 1. By plugging this result into iv), one can obtain the following:
+The third statement for the treated scenario implies $(w^p)^T = (0_{1 \times n_{People}},\ 0_{1 \times (p-1)},\ 1,\ 0_{1 \times (n_{Sources}-p)})$. This is because there is only one node in each sink p. The index referring to that node is therefore the only one different from zero in $w^p$. $1_n^Tw=1$ enforces its value to be exactly equal to 1. By plugging this result into iv), one can obtain the following:
 $$
 x_{\infty}^i = 
 \begin{cases}
@@ -68,7 +68,7 @@ x_{\infty}^i =
 	\sum_{p=1}^{n_{Sources}} z_{i,p}(x(0)^{n_{People}+p}), & \text{otherwise}
 \end{cases}
 $$
-where $x(0)^{n_{People}+p}$ is the $(n_{People}+p)^{th}$ element of x(0) (= the $p^{th}$ source initial condition). The steady state value of x therefore does not depend on the population initial conditions. It just depends on the sources'. Furthermore, it depends on $z_{i,p}$, whose value is strictly greater than zero for the population as  illustrated earlier. Their exact value depends on the random variables in our model and therefore cannot be estimated in general and their expected value depend on the traits and the connections model. \newline
+where $x(0)^{n_{People}+p}$ is the ($n_{People}+p$)th element of x(0). The steady state value of x therefore does not depend on the population initial conditions. It just depends on the sources'. Furthermore, it depends on $z_{i,p}$, whose value is strictly greater than zero for the population as  illustrated earlier. Their exact value depends on the random variables in our model and therefore cannot be estimated in general. (verificare) \newline
 The result can be further simplified by plugging in the values of the initial conditions (-1 for fake and +1 for real news sources):
 $$
 x_{\infty}^i = 
@@ -85,51 +85,27 @@ $
 -1,& \text{sink p is fake news source}
 \end{cases}
 $
-The parameters $z_{i,p},\ p\in\{1,...,n_{Sources}\}$, are convex combination coefficients, which means that $\sum_{p=1}^{n_{Sources}} z_{i,p} = 1$ $\forall$ i.
+$z_{i,p},\ p\in\{1,...,n_{Sources}\}$, are convex combination coefficients, which means that $\sum_{p=1}^{n_{Sources}} z_{i,p} = 1$ $\forall$ i.
 If there is only one type of sources (either fake or real news), then $\sum_{p=1}^{n_{Sources}} z_{i,p}\delta = \delta*\sum_{p=1}^{n_{Sources}} z_{i,p} = \delta$ which is either +1 or -1 depending on whether the only type of source is real or fake: 
 $x_\infty = 
 \begin{cases}
 1_n,& \text{Only real news sources}\\
 -1_n,& \text{Only fake news sources}
-\end{cases}$
-This is consistent with the expectations: if there is only one type of news sources, the whole population will tend to fully believe its opinion as time goes to infinity. This is furthermore independent of the population initial condition.
+\end{cases}$ 
 \subsection{$n_{Sources} = 1$}
-If $n_{Sources}=1$, then there is either a single fake or a single real news source. The condensation digraph contains a single aperiodic sink, which is composed by the source itself. The source is reachable from every node in G and the other nodes are reachable from every node in the graph but from the source. This makes the divulger the only globally reachable node in the graph. Its subgraph is furthermore aperiodic because of the self-loops. From this it follows for the row-stochastic matrix A:
+If $n_{Sources}=1$, then there is either a single fake or real news source. The condensation digraph contains a single aperiodic sink, which is composed by the source itself. The source is reachable from every node in G and the other nodes are reachable from every node in the graph but from the source. This makes the divulger the only globally reachable node in the graph. Its subgraph is furthermore aperiodic. From this it follows for the row-stochastic matrix A:
 \begin{enumerate}
 	\item
 	The eigenvalue 1 is simple and all other eigenvalues $\mu$ satisfy $|\mu|<1$
 	\item
-	A is semi-convergent and $lim_{k->\infty} A^k = 1_n w^T$, where $w \in \mathbb{R}^n$ satisfies $w\geq0, 1_n^T w = 1$, and $w^TA=w^T$
+	A is semi-convergent and $lim_{k->\infty} A^k = 1_n w^T$, where $w \in \mathbb{R}^n$ satisfies $w>=0, 1_n^T w = 1$, and $w^TA=w^T$
 	\item
-	$w\geq0$ is the left dominant eigenvector of A and $w_i>0$ if and only if $i$ is globally reachable. As previously discussed, this is the case only for the source in the considered scenario. \newline
+	$w>=0$ is the left dominant eigenvector of A and $w_i>0$ if and only if $i$ is globally reachable. As previously discussed, this is only the case for the single source in the treated example. \newline
 	$\implies$ $w^T = (0,...,0,1)$.
 	\item
-	$x_\infty = (w^T x(0))1_n = x(0)^{n_{People}} 1_n = 	\begin{cases}
+	$x_\infty = (w^T x(0))1_n = x(0)^n 1_n = 	\begin{cases}
 	1_n,& \text{Real news source}\\
 	-1_n, & \text{Fake news source}
 	\end{cases}$
-	Where $x(0)^{n_{People}}$ is the $n_{People}^{th}$ element of x(0) (the source initial condition). 
+	\newline The whole network would therefore converge to the source opinion for any people's initial conditions.
 \end{enumerate}
-The whole network would therefore converge to the source opinion as time goes to infinity and this is independent of the population initial conditions.
-\subsection{Population network not strongly connected}
-\begin{figure}[!t]
-	\centering
-	\includegraphics[width=2.5in]{Figures/not_strongly_connected.png}
-	\caption{Example of a not fully connected network condensation digraph C(G). The people interactions are summarized by the respective subnetworks, there are then one source of fake news (red) and two sources of real news (blue).}
-	\label{pics:nonconnectednetwork}
-\end{figure}
-As previously discussed, if the population network is not strongly connected, there have to be at least two separated population networks, which are strongly connected if taken individually. Figure~\ref{pics:nonconnectednetwork} shows the condensation digraph for an example of a disconnected network. Each sub-network might have one or more nodes and forms a strongly connected network. Each sub-network might or might not be connected to one or multiple sources. \newline
-In order to find the steady state, each network can be observed separately:
-\begin{itemize}
-	\item 
-	Provide a label to each sub-network, $G_i$, $i\in\{1,...,n_{SubNets}\}$, $n_{SubNets}=$ $\#$ sub-networks.
-	\item 
-	For i = 1:$n_{SubNets}$
-	\begin{itemize}
-		\item 
-		Count the number of nodes $n_{People}^i$ and the number of sources $n_{Sources}^i$ in $G_i$. 
-		\item 
-		Apply the formulas presented in the previous sections to find the steady state of the network i.
-	\end{itemize}
-\end{itemize}
-The sub network steady states are therefore independent of one another. The results will be therefore completely different in general. 
