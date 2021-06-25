@@ -31,7 +31,30 @@ Figure~\ref{pics:critdistribution} shows the critical thinking probability distr
 \end{figure}
 In the experiments, the parameter instruction level is varied in its whole range [0,1] and the average opinion and the opinions standard deviation are computed. The rest of the parameters are left as in $Baseline0B$. For each instruction level, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions.
 Figure~\ref{pics:critstatistics} shows the results. As expected, the higher the instruction level the closer the average opinion to 1 and vice versa the lower the instruction level, the closer the average opinion to -1. Furthermore, as the peak gets sharper (either on the right or on the left side) the standard deviation decreases. The opinion therefore converges to values close to 1 (or -1) and the standard deviation decreases as $|level-0.5|$ increases. 
-
+\subsection{Society Diversity}
+The goal of the numerical experiment presented in this section is investigating the effect of the $diversity\ factor\ \alpha$ on the transient and steady state behavior of the network opinions. The parameter $\alpha \in \mathbb{R}$ models the diversity in the network. It therefore affects the trait $similarity$.
+A function f maps a value of $\alpha$ to its corresponding similarity probability distribution. 
+$$
+f: \mathbb{R} \to p 
+$$
+$$
+p:= \{g,\ g: \mathbb{R} \to \mathbb{R}_+,\ \int_{-\infty}^{\infty} g(x) \,dx = 1\}
+$$
+In order to obtain this mapping, a simple uniform distribution is used:
+$$
+f(\alpha) = U(-\alpha, \alpha), \alpha \in \mathbb{R}
+$$
+$$
+P(S_i\in[x,x+dx]) =  \frac{1}{2\alpha} \times dx\text{, x}\in [-\alpha, \alpha]
+$$
+where $S_i$ is the similarity coefficient of individual i.
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=2.5in]{Figures/similarity_distr_cp.jpg}
+	\caption{U(-$\alpha$, $\alpha$)}
+	\label{pics:uniformalpha}
+\end{figure}
+Figure~\ref{pics:uniformalpha} shows U(-$\alpha$, $\alpha$). The diversity in the society increases as $\alpha$ increases. Each possible similarity value occurs with the same probability as the others. 
 \subsection{Polarization}
 
 The goal of the numerical experiments presented in this section is investigating the opinion polarization within a population using our model. In particular, we aim to understand how the model parameters influence the polarization. 
