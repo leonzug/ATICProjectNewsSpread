@@ -27,7 +27,7 @@ In our experiments, we varied three parameters: $C$ in the range $[0.2; 0.6]$, n
 The mean is at  $0 \pm 5\times 10^{-3}$ for all cases, which means that there is not a predominant opinion. This is expected, because the parametrization does not favour one opinion. When the news sources are spread, the average is even closer to 0 ($0 \pm 10^{-3}$). Although in this section we are not interested in the average opinion, the fact that the mean is close to 0 makes the standard deviation and $R_2$ good metrics to evaluate the polarization. A high standard deviation correspond to many entries far from the center on both sides of the opinion spectrum.\\
 
 Because of the mean $\overline{x}$ close to 0 and $N=100$, we have
-$$ \sigma^2 = \frac{1}{N} \sum_{i=1}^N x_i (x_i-\overline{x})^2 \approx \frac{1}{N} \sum_{i=1}^N x_i^2 = R_2.$$
+$$ \sigma^2 = \frac{1}{N-1} \sum_{i=1}^N (x_i-\overline{x})^2 \approx \frac{1}{N} \sum_{i=1}^N x_i^2 = R_2.$$
 
 Thus, the two metrics carry the same information about the polarization and, for sake of simplicity, we only discuss the standard deviation. Results for 30 parameters combinations are shown in Figure~\ref{pics:pol_std}. Since the opinions are between $-1$ and $1$, the standard deviation is between 0 and 1.\\
 
