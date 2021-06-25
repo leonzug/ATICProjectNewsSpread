@@ -1,5 +1,36 @@
 \section{Numerical Experiments}
 
+\subsection{Instruction Level}
+The goal of the numerical experiments presented in this section is investigating the effect of the \emph{instruction level} on the population steady state opinions. The instruction level $\in [0,1]$ models the capacity of people to identify whether a source is spreading real or fake news. It therefore affects the trait \emph{critical thinking}. A function $f$ is defined that maps an instruction level to its corresponding critical thinking probability distribution:
+$$
+f: [0,1] \to p 
+$$
+$$
+p:= \{g,\ g: [0,1] \to \mathbb{R}_+,\ \int_{0}^{1} g(x) \,dx = 1\}
+$$
+In order to obtain this mapping, the beta distribution is employed: 
+$$
+f(\text{level}) = Beta(\alpha(\text{level}), \beta(\text{level}))\text{, level} \in [0,1]
+$$
+$$
+P(CT_i\in[x,x+dx]) = [f(\text{level})](x)\times dx\text{, x}\in [0,1]
+$$
+, where $CT_i$ is the critical thinking parameter for individual i. The relationships between the instruction level and $\alpha$ and $\beta$ are provided in the code in the appendix. 
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=3.5in]{Figures/instruction_level_dist.png}
+	\caption{Critical thinking probability distribution for instruction level = \{0.1, 0.5, 0.9\}.}
+	\label{pics:critdistribution}
+\end{figure}
+Figure~\ref{pics:critdistribution} shows the critical thinking probability distribution for three examples of instruction level. A higher instruction level implies a more critical society with the distribution peak moving to the right (= higher critical thinking coefficient). Vice versa, a low instruction level moves the distribution peak to the left (lower critical thinking coefficient). \newline
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=3.5in]{Figures/instruction_results.png}
+	\caption{Average Opinion and Opinions Standard Deviation for instruction level = 0:0.1:1}
+	\label{pics:critstatistics}
+\end{figure}
+In the experiments, the parameter instruction level is varied in its whole range [0,1] and the average opinion and the opinions standard deviation are computed. The rest of the parameters are left as in $Baseline0B$. For each instruction level, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions.
+Figure~\ref{pics:critstatistics} shows the results. As expected, the higher the instruction level the closer the average opinion to 1 and vice versa the lower the instruction level, the closer the average opinion to -1. Furthermore, as the peak gets sharper (either on the right or on the left side) the standard deviation decreases. The opinion therefore converges to values close to 1 (or -1) and the standard deviation decreases as $|level-0.5|$ increases. 
 
 \subsection{Polarization}
 

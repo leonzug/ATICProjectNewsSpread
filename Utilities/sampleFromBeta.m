@@ -1,4 +1,5 @@
 function [x] = sampleFromBeta(N, instruction_level)
+inst = instruction_level;
 pl = false;
 if instruction_level <= 1 && instruction_level >= 0
     instruction_level = -(6*instruction_level-3);
@@ -20,7 +21,8 @@ if instruction_level <= 1 && instruction_level >= 0
         figure
         plot(X,y,'Color','r','LineWidth',2)
         hold on
-        legend({"a = " + a + " b = " + b},'Location','NorthEast');
+        %legend({"a = " + a + " b = " + b},'Location','NorthEast');
+        %title("Critical Thinking Probability Distribution: " + "Instruction Level = " + inst)
         hold off
     end
 
