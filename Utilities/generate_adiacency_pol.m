@@ -1,4 +1,4 @@
-function [A, FakeSources, RealSources] = generate_adiacency(people, traits, nRealNews, nFakeNews, newsRange, locality, C, nRoot)
+function [A, FakeSources, RealSources] = generate_adiacency_pol(people, traits, nRealNews, nFakeNews, newsRange, locality, C, nRoot)
 
 % Settable Parameters: 
 % P(connection between node i and node j) = C / (distance(i,j))^(1/nRoot)
