@@ -1,5 +1,49 @@
 \section{Numerical Experiments}
-
+Two baselines are defined for the numerical experiments, which are referred to as $Baseline0A$ and $Baseline0B$. In each experiment, one or more parameters are varied, while the rest are left as in either one of these baselines. The parameter values were selected through a trial and error procedure with the following goals:
+\begin{itemize}
+	\item
+	$\#$ of people sufficiently large in order not too have a too large variance over different experiments with same parameters.
+	\item
+	Reasonable computation time per experiment.
+	\item
+	Reasonable average number of connections per individual.
+	\item
+	Chi più ne ha, più ne metta
+\end{itemize}
+Table \ref{table:1} summarizes the parameter values of $Baseline0A$.
+\begin{table}[h!]
+\centering
+\begin{tabular}{||c | c || c | c ||}
+	\hline
+	Parameter&Value&Parameter&Value\\
+	\hline
+	$C$&0.2&$range$& $\begin{bmatrix} 0.1n_{People} \\ 0.1 n_{People}\end{bmatrix}$\\
+	$n_{Root}$&4&$local$&$\begin{bmatrix} True \\ True\end{bmatrix}$\\
+	$n_{People}$&100&$similarity$&$\delta(x-0.5)$\\
+	$n_{Fake}$&2&$crit.think.$&$\delta(x-0.5)$\\
+	$n_{Real}$&2&$influ.$&$\delta(x-0.5)$\\
+	\hline
+\end{tabular}
+\newline
+\caption{Baseline0A parameter values}
+\label{table:1}
+\end{table}
+The only difference between $Baseline0A$ and $0B$ are the probability density functions of the traits, which are illustrated in Table \ref{table:2} for $0B$.
+\begin{table}[h!]
+\centering
+	\begin{tabular}{||c | c||}
+	\hline
+	Parameter&Value\\
+	\hline
+	$similarity$&$U(0,1)$\\
+	$crit.think.$&$U(0,1)$\\
+	$influ.$&$U(0,1)$\\
+	\hline
+	\end{tabular}
+	\newline
+	\caption{Baseline0B traits probability distributions}
+	\label{table:2}
+\end{table}
 \subsection{Instruction Level}
 The goal of the numerical experiments presented in this section is investigating the effect of the \emph{instruction level} on the population steady state opinions. The instruction level $\in [0,1]$ models the capacity of people to identify whether a source is spreading real or fake news. It therefore affects the trait \emph{critical thinking}. A function $f$ is defined that maps an instruction level to its corresponding critical thinking probability distribution:
 $$
@@ -40,7 +84,7 @@ $$
 $$
 p:= \{g,\ g: \mathbb{R} \to \mathbb{R}_+,\ \int_{-\infty}^{\infty} g(x) \,dx = 1\}
 $$
-In order to obtain this mapping, a simple uniform distribution is used:
+In order to obtain this mapping, a simple uniform distribution is employed:
 $$
 f(\alpha) = U(-\alpha, \alpha), \alpha \in \mathbb{R}
 $$
