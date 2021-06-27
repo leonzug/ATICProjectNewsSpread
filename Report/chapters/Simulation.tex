@@ -32,7 +32,7 @@ Figure~\ref{pics:critdistribution} shows the critical thinking probability distr
 In the experiments, the parameter instruction level is varied in its whole range [0,1] and the average opinion and the opinions standard deviation are computed. The rest of the parameters are left as in $Baseline0B$. For each instruction level, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions.
 Figure~\ref{pics:critstatistics} shows the results. As expected, the higher the instruction level the closer the average opinion to 1 and vice versa the lower the instruction level, the closer the average opinion to -1. Furthermore, as the peak gets sharper (either on the right or on the left side) the standard deviation decreases. The opinion therefore converges to values close to 1 (or -1) and the standard deviation decreases as $|level-0.5|$ increases. 
 \subsection{Society Diversity}
-The goal of the numerical experiment presented in this section is investigating the effect of the $diversity\ factor\ \alpha$ on the transient and steady state behavior of the network opinions. The parameter $\alpha \in \mathbb{R}$ models the diversity in the network. It therefore affects the trait $similarity$.
+The goal of the numerical experiment presented in this section is investigating the effect of the diversity factor $\alpha$ on the transient and steady state behavior of the network opinions. The parameter $\alpha \in \mathbb{R}$ models the diversity in the network. It therefore affects the trait $similarity$.
 A function f maps a value of $\alpha$ to its corresponding similarity probability distribution. 
 $$
 f: \mathbb{R} \to p 
@@ -48,13 +48,16 @@ $$
 P(S_i\in[x,x+dx]) =  \frac{1}{2\alpha} \times dx\text{, x}\in [-\alpha, \alpha]
 $$
 where $S_i$ is the similarity coefficient of individual i.
+The diversity in the society increases as $\alpha$ increases. Each possible similarity value occurs with the same probability but as $\alpha$ increases, the spectrum of possibilities gets larger. \newline
+In the experiments, the parameter $\alpha$ is varied in [0,10] and the average opinion and the opinions standard deviation are computed. Furthermore the length of the transient phase is recorded. The rest of the parameters are left as in $Baseline0B$. For each $\alpha$, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions. 
+
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=2.5in]{Figures/similarity_distr_cp.jpg}
-	\caption{U(-$\alpha$, $\alpha$)}
-	\label{pics:uniformalpha}
+	\includegraphics[width=3.5in]{Figures/diversity_results.png}
+	\caption{Average Opinion, Opinions Standard Deviation and time to steady state for $\alpha$ = 0:0.5:10.}
+	\label{pics:diversityresults}
 \end{figure}
-Figure~\ref{pics:uniformalpha} shows U(-$\alpha$, $\alpha$). The diversity in the society increases as $\alpha$ increases. Each possible similarity value occurs with the same probability as the others. 
+Figure~\ref{pics:diversityresults} illustrates the results. The average opinion does not show any trend as it oscillates around the value zero. This is expected since no opinion is preferred with this set up. By contrast, the standard deviation increases with $\alpha$. In a more diverse society, there is a larger variety of groups sharing the same view of things. People belonging to a group will prefer to stick to that group opinion. The steady state will therefore show a greater variety of opinions with the resulting larger standard deviation. Finally, the parameter time to steady state shows an exponential decrease from $\approx$ 550 to $\approx$ 430 timesteps. The presented model therefore predicts a quicker convergence to the steady state as the society gets more diverse.
 \subsection{Polarization}
 
 The goal of the numerical experiments presented in this section is investigating the opinion polarization within a population using our model. In particular, we aim to understand how the model parameters influence the polarization. 

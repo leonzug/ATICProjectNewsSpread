@@ -2,7 +2,7 @@ addpath('Utilities');
 clear all;
 
 N = 100;
-timesteps = 600;
+timesteps = 2000;
 nExperiments = 100;
 traits = {'similarity', 'influenceable','critical thinker'};
 nRealNews = 2;
@@ -18,7 +18,7 @@ nRoot = 4;
 % index 1: Fake News; index 2: Real News.
 newsRange = round([0.1, 0.1]*N);
 locality = [true, true];
-similarity_level = 0:0.5:10;
+similarity_level = 0:1:20;
 averages = zeros(size(similarity_level,2),1);
 stds = zeros(size(similarity_level,2),1);
 t_steady = zeros(size(similarity_level,2),1);
@@ -58,6 +58,9 @@ plot(similarity_level,averages);
 title("Similarity level vs Averages")
 figure;
 plot(similarity_level,stds);
+title("Similarity Level vs Stds")
+figure;
+plot(similarity_level,t_steady);
 title("Similarity Level vs Stds")
 %degree = 2;
 %perturbation = 'censorship';
