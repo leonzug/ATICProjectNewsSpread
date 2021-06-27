@@ -10,7 +10,8 @@ Two baselines are defined for the numerical experiments, which are referred to a
 	\item
 	Chi più ne ha, più ne metta
 \end{itemize}
-Table \ref{table:1} summarizes the parameter values of $Baseline0A$.
+Table \ref{table:1} summarizes the parameter values of $Baseline0A$. \newline
+The parameter values of $Baseline0B$ are the same as in $Baseline0A$ but for the probability distribution of the traits, which are illustrated in Table \ref{table:2}.
 \begin{table}[h!]
 \centering
 \begin{tabular}{||c | c || c | c ||}
@@ -28,7 +29,6 @@ Table \ref{table:1} summarizes the parameter values of $Baseline0A$.
 \caption{Baseline0A parameter values}
 \label{table:1}
 \end{table}
-The only difference between $Baseline0A$ and $0B$ are the probability density functions of the traits, which are illustrated in Table \ref{table:2} for $0B$.
 \begin{table}[h!]
 \centering
 	\begin{tabular}{||c | c||}
@@ -93,15 +93,15 @@ P(S_i\in[x,x+dx]) =  \frac{1}{2\alpha} \times dx\text{, x}\in [-\alpha, \alpha]
 $$
 where $S_i$ is the similarity coefficient of individual i.
 The diversity in the society increases as $\alpha$ increases. Each possible similarity value occurs with the same probability but as $\alpha$ increases, the spectrum of possibilities gets larger. \newline
-In the experiments, the parameter $\alpha$ is varied in [0,10] and the average opinion and the opinions standard deviation are computed. Furthermore the length of the transient phase is recorded. The rest of the parameters are left as in $Baseline0B$. For each $\alpha$, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions. 
+In the experiments, the parameter $\alpha$ is varied in [0,50] and the average opinion and the opinions standard deviation are computed. Furthermore the length of the transient phase is recorded. The rest of the parameters are left as in $Baseline0B$. For each $\alpha$, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions. 
 
 \begin{figure}[!t]
 	\centering
 	\includegraphics[width=3.5in]{Figures/diversity_results.png}
-	\caption{Average Opinion, Opinions Standard Deviation and time to steady state for $\alpha$ = 0:0.5:10.}
+	\caption{Average Opinion, Opinions Standard Deviation and time to steady state for $\alpha$ = 0:1:50.}
 	\label{pics:diversityresults}
 \end{figure}
-Figure~\ref{pics:diversityresults} illustrates the results. The average opinion does not show any trend as it oscillates around the value zero. This is expected since no opinion is preferred with this set up. By contrast, the standard deviation increases with $\alpha$. In a more diverse society, there is a larger variety of groups sharing the same view of things. People belonging to a group will prefer to stick to that group opinion. The steady state will therefore show a greater variety of opinions with the resulting larger standard deviation. Finally, the parameter time to steady state shows an exponential decrease from $\approx$ 550 to $\approx$ 430 timesteps. The presented model therefore predicts a quicker convergence to the steady state as the society gets more diverse.
+Figure~\ref{pics:diversityresults} illustrates the results. The average opinion does not show any trend as it oscillates around the value zero. This is expected since no opinion is preferred with this set up. By contrast, the standard deviation increases with $\alpha$. In a more diverse society, there is a larger variety of groups sharing the same view of things. People belonging to a group will prefer to stick to that group opinion. The steady state will therefore show a greater variety of opinions with the resulting larger standard deviation. Finally, the parameter time to steady state shows an initial decrease from $\approx$ 550 to $\approx$ 430 timesteps for $\alpha \in [0,10]$ and then it starts increasing with an approximately linear trend for the rest of the time. 
 \subsection{Polarization}
 
 The goal of the numerical experiments presented in this section is investigating the opinion polarization within a population using our model. In particular, we aim to understand how the model parameters influence the polarization. 
