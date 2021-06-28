@@ -1,6 +1,6 @@
 \section{Theoretical Analysis}
 \subsection{General Considerations}
-Without loss of generality, the labels of the nodes in the graph can be selected so that the indices referring to the fake/real news sources appear to be the last ones. Considering $n_p$ as the number of people in the network, $n_s$ as the number of fake and real news sources and $n=n_p + n_s$ as the number or rows/columns of A, the matrix A can be then partitioned as illustrated in the following:
+Without loss of generality, the labels of the nodes in the graph can be selected so that the indices referring to the fake/real news sources appear to be the last ones. Considering $n_p$ as the number of people in the network, $n_s$ as the number of fake and real news sources and $n = n_p + n_s$ the sum thereof, then $A \in \mathbb{R}^{ (n) \times (n)}$ can be partitioned as follows:
 
 $$
 A = 
@@ -18,11 +18,9 @@ spec(A) \subset \{\mu \in \mathbb{C}^n,\ \mu_i = 1\ \forall i & \in \{1,..,n_{mu
 | \mu_i | < 1 \text{ otherwise}\}
 \end{align*}
 Because $\rho(A) = 1$, the matrix A cannot be stable but it is semi-stable iff $1 \in spec(A)$ is semi-simple. \newline
-The randomness in the graph generation process do not allow to conclude much more deterministically. The properties of $\tilde{A}$ are of great importance to infer the system behavior. It is remarkable that with the proposed set up: N = 100 individuals and $C$ = 0.2, nRoot = 4 (this fully describes the probabilistic model of the connections between a person and his neighbors, see previous chapter), $\tilde{A}$ describes a strongly-connected graph in 99.4$\%$ of the cases. This value was obtained after generating 10000 different networks. The graph is directed and a connection from node i to node j implies a connection from j to i but with different weights in general. The 0.6$\%$ represents therefore some pathological and unlikely cases where part of the network is completely disconnected from the rest. This could represent an isolated and separated society living in our simulated world. Since these cases are relevant for the aim of this project (the news spread in a connected society is studied), these cases were simply discarded. From now on, it can therefore be assumed that the graph describing the human-human interactions is strongly connected, meaning that the matrix $\tilde{A}$ is irreducible.\newline In the following, the steady state behavior of the discrete time averaging system 
-$$
-X(k+1) = AX(k)
-$$
+The randomness in the graph generation process do not allow to conclude much more deterministically. The properties of $\tilde{A}$ are of great importance to infer the system behavior. It is remarkable that with the proposed set up: N = 100 individuals and $C$ = 0.2, nRoot = 4 (this fully describes the probabilistic model of the connections between a person and its neighbors, see Subsection~\ref{subsec:connections_existence}. The numerical values are the ones used for the numerical experiments, see Section~\ref{sec:experiments}), $\tilde{A}$ describes a strongly-connected graph in 99.4$\%$ of the cases. This value was obtained after generating 10000 different networks. The graph is directed and a connection from node i to node j implies a connection from j to i but with different weights in general. The 0.6$\%$ represents therefore some pathological and unlikely cases where part of the network is completely disconnected from the rest. This could represent an isolated and separated society living in our simulated world. Since these cases are not relevant for the aim of this project (the news spread in a connected society is studied), these cases were simply discarded. From now on, it can therefore be assumed that the graph describing the human-human interactions is strongly connected, meaning that the matrix $\tilde{A}$ is irreducible.\newline In the following, the steady state behavior of the discrete time averaging system of Equation~\eqref{eq:model}
 is analyzed under various circumstances.
+\acomment{check that convergence to consensus if no source}
 \subsection{$n_s = 0$}
 If there are no sources, the matrix A = $\tilde{A}$ describes a strongly connected digraph. Each node has a self-cycle meaning that the single strongly connected component is acyclic. The graph is therefore strongly connected and acyclic, which implies that the matrix A describing it is primitive. This, together with the fact that A is row-stochastic, implies that A is semi-convergent and that the discrete-time averaging system convergences to consensus and namely to:
 $$
@@ -37,7 +35,7 @@ $$
 \begin{figure}[!t]
 	\centering
 	\includegraphics[width=2.5in]{Figures/condensation_digraph.png}
-	\caption{Example of a network condensation digraph C(G). The people interactions are summarized as a single node, there are then one source of fake news (red) and two sources of real news (blue).}
+	\caption{Example of a network condensation digraph C(G). The people interactions are summarized as a single node and there are one source of fake news (red) and two sources of real news (blue).}
 	\label{pics:condensation_digraph_example}
 \end{figure}
 Figure~\ref{pics:condensation_digraph_example} shows an example condensation digraph for a network with irreducible $\tilde{A}$, one source of fake news and two sources of real news. The condensation is in general composed of $n_s+1$ nodes. The sources are all represented by sinks and the network of people by a single node connected to all sinks. \newline

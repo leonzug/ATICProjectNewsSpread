@@ -10,6 +10,7 @@ To study the spread of news in the population, three types of agents are conside
 \end{figure}
 In order to be able to use a multitude of theoretical and analytical tools learned during the course, a linear model with the following update equation is studied
 \begin{equation}
+\label{eq:model}
 x(k+1) = A x(k),
 \end{equation}
 where $x_i(k) \in [-1;1]$ represents the opinion of individual or source  $i$ at timestep $k$ and $A$ is the adjacency matrix of the network, as in the popular opinion model\cite{Friedkin1990}.
@@ -44,10 +45,10 @@ P(i,j) = \frac{C}{\sqrt[\text{nRoot}]{\vert i-j\vert}}
 where $C$ and $nRoot$ are tunable parameters that shape the probability distribution. $C$ linearly increases or decreases the probability of connections between neighbors, while $\text{nRoot}$ defines how quickly $P(i,j)$ decays as a function of $\vert i-j \vert$.
 
 \subsubsection{Connections Between Individuals and Sources}
-Each news source has a number of connections given by $n = 10\% (N)$, where $N$ is the number of individuals.
+Each news source has a number of connections (the "Range" of a news source) given by $\text{Range} = 10\% (N)$, where $N$ is the number of individuals.
 News sources are connected to individuals either \textit{locally} or \textit{non-locally}. 
-\\If the new sources are connected locally, for each news source an individual is chosen and then its $n$ geographically closest individuals (on the straight line defined at the beginning of this subchapter) are connected to the news source.
-\\If instead the news sources are connected non-locally, $n$ individuals are randomly selected (from a uniform distribution) and connected to the news source.
+\\If the new sources are connected locally, for each news source an individual is chosen (from a uniform distribution) and then this individual and its $\tilde{N}$ geographically closest individuals (on the straight line defined at the beginning of this subchapter) are connected to the news source.
+\\If instead the news sources are connected non-locally, $\tilde{N}$ individuals are randomly selected (from a uniform distribution) and connected to the news source.
 \\In our framework, locality and non-locality of news sources can be set independently for real news sources and fake news sources.
 
 
