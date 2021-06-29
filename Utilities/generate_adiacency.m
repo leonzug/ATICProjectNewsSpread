@@ -20,7 +20,7 @@ for k=1:nTraits
     end
     for i = 1:nPeople
         for j = (i+1):nPeople
-            distance = min(abs(j-i), abs(nPeople-i));
+            distance = min(abs(j-i), abs(nPeople-j+i));
             u = rand;
             if u < C/nthroot(distance, nRoot)
                 A(i,j) = 1;
