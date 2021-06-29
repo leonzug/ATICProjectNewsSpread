@@ -24,3 +24,10 @@ if or(strcmp(metric,'std'),strcmp(metric,'standard deviation'))
         evaluation(i) = std(X(:,step*i));
     end
 end
+if or(or(strcmp(metric,'avg_dt'),strcmp(metric,'dt')),strcmp(metric,'dt'))
+    evaluation = zeros(instances,1);
+    step = floor(size(X,2)/instances);
+    for i=1:instances
+        evaluation(i) = mean(abs(X(:,step*i)-X(:,step*i-1)));
+    end
+end
