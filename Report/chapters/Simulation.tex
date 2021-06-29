@@ -47,6 +47,7 @@ The parameter values of $\text{Baseline}_\text{0B}$ are the same as in $\text{Ba
 	\label{table:2}
 \end{table}
 \subsection{Instruction Level}
+\label{sec:Instr_Level}
 The goal of the numerical experiments presented in this section is investigating the effect of the \emph{instruction level} on the population's steady state opinions. The instruction level $\in [0,1]$ models the capacity of people to identify whether a source is spreading real or fake news. It therefore affects the trait \emph{critical thinking}. A function $f$ is defined that maps an instruction level to its corresponding critical thinking probability distribution:
 $$
 f: [0,1] \to p 
@@ -75,7 +76,7 @@ Figure~\ref{pics:critdistribution} shows the critical thinking probability distr
 	\caption{Average Opinion and Opinions Standard Deviation for instruction level = 0:0.1:1}
 	\label{pics:critstatistics}
 \end{figure}
-In the experiments, the parameter instruction level is varied in its whole range [0,1] and the average opinion and the opinions standard deviation are computed. The rest of the parameters are left as in $Baseline0B$. For each instruction level, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions.
+In the experiments, the parameter instruction level is varied in its whole range [0,1] and the average opinion and the opinions standard deviation are computed. The rest of the parameters are left as in $\text{Baseline}_\text{0B}$. For each instruction level, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions.
 Figure~\ref{pics:critstatistics} shows the results. As expected, the higher the instruction level the closer the average opinion to 1 and vice versa the lower the instruction level, the closer the average opinion to -1. Furthermore, as the peak gets sharper (either on the right or on the left side) the standard deviation decreases. The opinion therefore converges to values close to 1 (or -1) and the standard deviation decreases as $|level-0.5|$ increases. 
 \subsection{Society Diversity}
 The goal of the numerical experiment presented in this section is investigating the effect of the diversity factor $\alpha$ on the transient and steady state behavior of the network opinions. The parameter $\alpha \in \mathbb{R}$ models the diversity in the network. It therefore affects the trait $similarity$.
@@ -95,7 +96,7 @@ P(S_i\in[x,x+dx]) =  \frac{1}{2\alpha} \times dx\text{, x}\in [-\alpha, \alpha]
 $$
 where $S_i$ is the similarity coefficient of individual i.
 The diversity in the society increases as $\alpha$ increases. Each possible similarity value occurs with the same probability but as $\alpha$ increases, the spectrum of possibilities gets larger. \newline
-In the experiments, the parameter $\alpha$ is varied in [0,50] and the average opinion and the opinions standard deviation are computed. Furthermore the length of the transient phase is recorded. The rest of the parameters are left as in $Baseline0B$. For each $\alpha$, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions. 
+In the experiments, the parameter $\alpha$ is varied in [0,50] and the average opinion and the opinions standard deviation are computed. Furthermore the length of the transient phase is recorded. The rest of the parameters are left as in $\text{Baseline}_\text{0B}$. For each $\alpha$, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions. 
 
 \begin{figure}[!t]
 	\centering
@@ -104,6 +105,18 @@ In the experiments, the parameter $\alpha$ is varied in [0,50] and the average o
 	\label{pics:diversityresults}
 \end{figure}
 Figure~\ref{pics:diversityresults} illustrates the results. The average opinion does not show any trend as it oscillates around the value zero. This is expected since no opinion is preferred with this set up. By contrast, the standard deviation increases with $\alpha$. In a more diverse society, there is a larger variety of groups sharing the same view of things. People belonging to a group will prefer to stick to that group opinion. The steady state will therefore show a greater variety of opinions with the resulting larger standard deviation. Finally, the parameter time to steady state shows an initial decrease from $\approx$ 550 to $\approx$ 430 timesteps for $\alpha \in [0,10]$ and then it starts increasing with an approximately linear trend for the rest of the time. 
+
+\subsection{Population manipulability}
+In this experiment, the goal is to investigate how modifying the \textit{Influenceability} parameter of the population affects the time to convergence of the opinions in the population. Qualitatively, this would be equivalent to study how well ideas spread in a "stubborn" population versus a highly manipulable population. If one thinks about the real world, the speed of idea spreading is a very important concept. A society with very stubborn individuals may be more stable, and on the other hand change is propelled by people with a flexible view on new ideas. \acomment{magari citare qualcosa, o mettere questo trafiletto in un altro posto}
+We define the manipulability level $\in [0,1]$ of the society and study how this affects the time to convergence of the opinion dynamics. A manipulability level of $0$ represents a society difficult to manipulate, while a manipulability level of $1$ represents a society where people are more influenceable. Again, this is modelled through the beta distribution, in a similar fashion as in Subsection~\ref{sec:Instr_Level}. This time, however, the \textit{influenceability} is modelled trhough the beta distribution. For the numerical experiments, the manipulability level is varied in the range $[0,1]$ and the other parameters are left as in $\text{Baseline}_\text{0B}$. The experiment is repeated 100 times and the results are averaged. A plot showing that the average time to steady state decreases when the society is more manipulable can be found in Figure~\ref{pics:man_steadystate}. In the range of manipualibility level $[0,1]$, the time to steady state goes from around a maximum of $\approx 580$ timesteps to a minimum of $\approx 480$ timesteps. The result is in line with expectations: the less influenceable individuals are, and the larger weights of the self-loops in the graph will be. For individuals, this corresponds to favoring their own ideas instead of the neighbors' ones and "slowing" thus the information propagation in the network.
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=3.5in]{Figures/Exp8_2.png}
+	\caption{Average timesteps necessary to reach steady state with varying the manipulability level in the range $[0,1]$.}
+\label{pics:man_steadystate}
+\end{figure}
+
+
 \subsection{Polarization}
 
 The goal of the numerical experiments presented in this section is investigating the opinion polarization within a population using our model. In particular, we aim to understand how the model parameters influence the polarization. 
@@ -140,6 +153,8 @@ Another remarkable result is the comparison between the cases where the news are
 For each $C$ and nRoot combination, the standard deviation is at most one third of the value for the corresponding case with local news. Also with spread news we observe an increase of polarization when $C$ and nRoot decrease, but the growth is less strong. This experiment suggest that a society where each individual has the chance to come in touch with all news sources and not only the ones close to their milieu, is less likely be polarized.
 \acomment{riferimento a letteratura? evitare di dare troppo significato!}
 \acomment{numerazione pagine manca}
+\acomment{descrizione di esperimento Social diversity poco chiara}
+\acomment{dire chiaramente nella teoria che A (la parte tra individui è simmetrica?}
 %\begin{algorithm}
 %\While {i > 0}{Do this}
 %\end{algorithm}
