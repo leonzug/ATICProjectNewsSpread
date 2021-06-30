@@ -1,11 +1,11 @@
 \section{Mathematical Formulation}
 \label{sec:mathematical}
-To study the spread of news in the population, three types of agents are considered: individuals (also called "people"), \textit{real} news sources, and \textit{fake} news sources. In the context of this research, we define a real news source as a source which does its best effort to spread reliable, unbiased and fact-checked information. Its opposite, the fake news source, has interest in spreading false information and actively and purposely does it. An example of one such network can be seen in Figure~\ref{pics:network_example}.
+To study the spread of news in the population, three types of agents are considered: individuals (also called "people"), \textit{real} news sources, and \textit{fake} news sources. In the context of this research, we define a real news source as a source that spreads reliable, unbiased and fact-checked information. Its opposite, the fake news source, spreads false information. An example of one such network can be seen in Figure~\ref{pics:network_example}.
 
 \begin{figure}
 \centering
 \includegraphics[width=2.5in]{Figures/network_example.png}
-\caption{Example of one network that could be generated with our model. The directed graph is formed by eight individuals 1-8, one source of fake news (red), two sources of real news (blue), and links between nodes. Every node has a self loop, with weight 1 for the news sources, and the news sources only have in-neighbors.}
+\caption{Example of a network that could be generated with our model. The directed graph is formed by eight individuals 1-8, one source of fake news (red), two sources of real news (blue), and links between nodes. Every node has a self loop, with weight 1 for the news sources, and the news sources only have in-neighbors.}
 \label{pics:network_example}
 \end{figure}
 In order to be able to use a multitude of theoretical and analytical tools learned during the course, a linear model with the following update equation is studied
@@ -13,14 +13,14 @@ In order to be able to use a multitude of theoretical and analytical tools learn
 \label{eq:model}
 x(k+1) = A x(k),
 \end{equation}
-where $x_i(k) \in [-1;1]$ represents the opinion of individual or source  $i$ at timestep $k$ and $A$ is the adjacency matrix of the network, as in the popular opinion model\cite{Friedkin1990}.
+where $x_i(k) \in [-1;1]$ represents the opinion of individual or source  $i$ at timestep $k$ and $A$ is the adjacency matrix of the network, as in the popular opinion model\cite{Friedkin1990}. Opinion $1$ corresponds to total belief in the real news, while opinion $-1$ corresponds to total belief in the fake news.
 Constructing the adjacency matrix $A$ is a non-trivial task as it requires several assumptions on the the existence of links between people, the existence of links between people and news sources, and the importance of each such link.
 The existence of links between different individuals and between individuals and sources is determined either by their physical distance or randomly, as will be explained in more detail in Subsection~\ref{subsec:connections_existence}.
-To compute the weights in the adjacency matrix, several qualitative but sensible (in the authors' opinions) assumptions are made:
+To compute the weights in the adjacency matrix, several qualitative but sensible assumptions are made:
 \acomment{spiegare: C, nRoot, local/non-local news connection}
 \renewcommand{\theenumi}{\roman{enumi}}
 \begin{enumerate}
-\item \textit{Similarity}: connections between similar people are stronger. This derives from the fact that people tend to listen to their peers, friends and colleagues more than people that are completely different from them \cite{Youyou2017}\cite{Afifi2013}. Real-world concepts that define similarity may include, but are not limited to: career path, certain behavorial traits, age, nationality, etc.
+\item \textit{Similarity}: connections between similar people are stronger. This derives from the fact that people tend to listen to their peers, friends and colleagues more than people that are completely different from them \cite{Youyou2017}\cite{Afifi2013}. Real-world concepts that define similarity may include, but are not limited to: career path, certain behavioral traits, age, nationality, etc.
 \acomment{non funziona citazione}
 \item \textit{Influenceability}: different people give different importance to their own personal opinions and can be more or less influenced by external opinions.
 \item \textit{Critical thinking}: a person may believe \textit{news sources} more or less, depending on how developed the critical thinking ability  is.
