@@ -26,7 +26,7 @@ To compute the weights in the adjacency matrix, several qualitative but sensible
 \item \textit{Critical thinking}: a person may believe fake or real news sources more or less, depending on how developed their critical thinking ability is.
 \end{enumerate}
 Mathematically, 
-translating these assumptions into a network adjacency matrix $A$ can be done in multiple ways. In this research we mainly present one way that is used for experiments in sections~\ref{sec:Instr_Level} to~\ref{sec:manipulability}, and then a second slightly modified one to investigate opinion polarization in~\ref{sec:polarization}. 
+translating these assumptions into a network adjacency matrix $A$ can be done in multiple ways. In this research we mainly present one way that is used for experiments in Sections~\ref{sec:Instr_Level} to~\ref{sec:manipulability}, and then a second slightly modified one to investigate opinion polarization in~\ref{sec:polarization}. 
 
 \subsection{Population Matrix}
 To build a realistic network, there needs to be some difference between individuals. To differentiate between them, a \textit{population matrix} $B \in \mathbb{R}^{n_p \times t}$ is introduced, where $n_p$ is the number of individuals in the network and $t$ is the number characteristics defined for each person. In this research, $t=3$ and the chosen characteristics are: \textit{similarity}, \textit{influenceability} and \textit{critical thinking ability}. The relative position of an individual inside the matrix $B$ matters, as can be seen in Paragraph~\ref{subsub: connections}. The columns of $B$ are initialized with different random distributions, depending on the desired predominance of traits in the modeled society. Examples of such distributions can be seen in the numerical experiments in Chapter~\ref{sec:experiments}.
@@ -40,9 +40,9 @@ When generating the adjacency matrix, connections between nodes need to be creat
 Connections are created based on geographical distance. The real-world is simplified to a straight line with periodic boundaries, where the position of an individual is given by its position inside of the vector $x$. The connection between individuals $i$ and $j$ is created with probability 
 
 
-\begin{equation}
+$$
 P(i,j) = \min\left\lbrace 1,\frac{C}{\sqrt[\text{nRoot}]{\vert i-j\vert}}\right\rbrace
-\end{equation}
+$$
 where $C\in \mathbb{R}^*_+$ and nRoot $\in \mathbb{N}^*$ are tunable parameters that shape the probability distribution. $C$ linearly scales the probability of connections between neighbors, while $\text{nRoot}$ defines how quickly $P(i,j)$ decays as a function of $\vert i-j \vert$.
 
 \subsubsection{Connections Among Individuals and Sources}
@@ -58,12 +58,13 @@ News connection type is either \textit{local} or \textit{non-local}.
 Once a connection is present, the next step is to define its strength.
 
 \subsubsection{Connections Between Individuals}
+\label{sec:conn_ind}
 If a connection from individual $i$ to individual $j$ exists, the weight $a_{ij}$ is initialized to 1, otherwise to 0 ($a_{ii}$ is always set to 0).
 The weights of the connections between individuals $i,j$ are then modified depending on the population matrix $B$. The weights $a_{ij}$ are modified sequentially for each couple of individuals $(i,j)$ according to following three update steps:
 
 \begin{enumerate}
 \item[\text{(S1)}] \textit{Similarity:} $a_{ij} \leftarrow \dfrac{a_{ij}}{1 + \vert s_i - s_j\vert}$, with $ i \neq j$ and where $s_i$ is the similarity value of individual $i$. 
-\item[\text{(S2)}] \textit{Influenceability:} $a_{ii} \leftarrow \dfrac{10}{1 + f_i}$, where $f_i$ is the influenceability value of individual $i$. The scaling factor $10$ was found empirically by trying to balance the effects of similarity and influenceability on the weights of A, for the baseline cases described in Section~\ref{sec:experiments}.
+\item[\text{(S2)}] \textit{Influenceability:} $a_{ii} \leftarrow \dfrac{10}{1 + f_i}$, where $f_i$ is the influenceability value of individual $i$. The scaling factor $10$ was found empirically by trying to balance the effects of similarity and influenceability on the weights of A, for the baseline case described in Section~\ref{sec:experiments}.
 \end{enumerate}
 
 
