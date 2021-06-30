@@ -32,6 +32,8 @@ figure(2)
 histogram(X(1:end-nRealNews-nFakeNews,end),20)
 xlim([-1, 1]);
 title('Opinion distribution')
+xlabel('Opinion')
+ylabel('Frequency')
 %[idx, C] = k_means(X);
 
 
