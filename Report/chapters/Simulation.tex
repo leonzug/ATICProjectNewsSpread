@@ -39,7 +39,7 @@ For the experiments where convergence is studied, the following expression was u
 $$
 k_{\infty}=\min k$$
 such that
-$$ \frac{1}{n_p} \sum_{j=1}^{n_p} \vert x(k+1)_j-x(k)}_j \vert <  \tau
+$$ \frac{1}{n_p} \sum_{j=1}^{n_p} \vert x(k+1)_j-x(k)_j \vert <  \tau
 $$
 where $\tau$ is the tolerance accepted for steady-state, here
 $\tau = 0.0001$. In other words, the system is considered at convergence if the average opinion changes for each node is below $0.01\% $ with respect to the previous step.
@@ -63,20 +63,38 @@ $$
 P(CT_i\in[x,x+dx]) = [f(L)](x) dx \text{ with } x\in [0,1],
 $$
 where $CT_i$ is the critical thinking parameter for individual i. 
-For the Beta distribution, the parameters $\alpha$ and $\beta$ are \textbf{[da completare...]} \acomment{da spiegare: come sono scelti, e il fatto che permettano di creare un buon mapping tra instruction level e pdf.} 
+The relation between the parameters $\alpha$ and $\beta$ and the instruction level $L$ is given by: 
+$$
+\{\alpha, \beta\} = 
+\begin{cases}
+parity \times \{2^{factor},\ 1\},& \text{L $\geq$ 0.5}\\
+parity \times \{1,\ 2^{factor}\},& \text{otherwise}
+\end{cases}
+$$
+$$ 
+\text{where }
+\text{$parity$ = 1.3 and $factor$ = -(6 $\times$ $L$ - 3)}
+$$
+For L = 0, $\{\alpha, \beta\} = 1.3\times\{1,\ 8\}$, for L = 1, $\{\alpha, \beta\} = 1.3\times\{8,\ 1\}$ and for L = 0.5, $\{\alpha, \beta\} = 1.3\times\{1,\ 1\}$. The parameter $parity$ is the value, which both parameters take when the instruction level is mediocre (L = 0.5). The parameter $\alpha$ ($\beta$) grows as L increase (decrease) from 0.5, while $\beta$ ($\alpha$) stays the same. 
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=3.5in]{Figures/instruction_level_dist.png}
+	\subfloat[Instruction level = 0.1]{\label{a}\includegraphics[width=.5\linewidth]{Figures/instr01.png}}\hfill
+	\subfloat[Instruction level = 0.5]{\label{b}\includegraphics[width=.5\linewidth]{Figures/instr05.png}}\par 
+	\subfloat[Instruction level = 0.9]{\label{c}\includegraphics[width=.5\linewidth]{Figures/instr09.png}}
 	\caption{Critical thinking probability distribution for instruction level = \{0.1, 0.5, 0.9\}.}
 	\label{pics:critdistribution}
 \end{figure}
+
 Figure~\ref{pics:critdistribution} shows the critical thinking probability distribution for three examples of instruction level. A higher instruction level implies, on average, a more critical society with the distribution peak moving to the right (higher critical thinking coefficient). Vice versa, a low instruction level moves the distribution peak to the left (lower critical thinking coefficient). \newline
+
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=3.5in]{Figures/instruction_results.png}
-	\caption{Average opinion and opinions' standard deviation (vertical axis) for instruction level = 0:0.1:1 (horizontal axis).}
+	\subfloat[Average vs Intruction Level level]{\label{a}\includegraphics[width=.5\linewidth]{Figures/instruct_average.png}}\hfill
+	\subfloat[Std vs Intruction Level]{\label{b}\includegraphics[width=.5\linewidth]{Figures/instruct_std.png}}\par 
+	\caption{Average opinion and standard deviation of opinions for instruction level = 0:0.1:1.}
 	\label{pics:critstatistics}
 \end{figure}
+
 In the experiments, the parameter instruction level is varied in its whole range [0,1] and the average opinion and the opinions' standard deviation are computed. The rest of the parameters are left as in Baseline. For each instruction level, 100 cases have been randomly generated and the average metrics have been computed for the steady state opinions.
 Figure~\ref{pics:critstatistics} shows the results. As expected, the higher the instruction level, the closer the average opinion is to 1. Vice versa, the lower the instruction level, the closer the average opinion to -1. Furthermore, as the peak gets sharper (either on the right or on the left side) the standard deviation decreases. The opinion therefore converges to values close to 1 (or -1) and the standard deviation decreases as $|L-0.5|$ increases. 
 \subsection{Society Diversity}
@@ -92,8 +110,10 @@ In the experiments, the parameter $D$ is varied in the range [0,50] and the aver
 
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=3.5in]{Figures/diversity_results.png}
-	\caption{Average Opinion, Opinions Standard Deviation and time to steady state (vertical axis) for $D$ = 0:1:50 (horizontal axis).}
+	\subfloat[Average vs Similarity level]{\label{a}\includegraphics[width=.5\linewidth]{Figures/similarity_vs_average.png}}\hfill
+	\subfloat[Std vs Similarity Level]{\label{b}\includegraphics[width=.5\linewidth]{Figures/similarity_vs_std.png}}\par 
+	\subfloat[Time to Steady State vs Similarity Level]{\label{c}\includegraphics[width=.5\linewidth]{Figures/similarity_vs_timesteps.png}}
+	\caption{Average opinion, standard deviation of opinions and time to steady state for $D$ = 0:1:50.}
 	\label{pics:diversityresults}
 \end{figure}
 Figure~\ref{pics:diversityresults} illustrates the results. The average opinion does not show any trend as it oscillates with a small amplitude around the value zero, with no bias. This is explainable with the randomness of the network generation. The unbiasedness is expected since no opinion is preferred with this set up. By contrast, the standard deviation increases with $D$. This makes sense, since in a more diverse society, a wider range of opinions is expected. The steady state will therefore show a greater variety of opinions with the resulting larger standard deviation. Finally, the parameter time to steady state shows an initial decrease from $\approx$ 550 to $\approx$ 430 timesteps for $D \in [0,10]$ and then it starts increasing linearly with $D$. The linear increase can be explained by the fact that the weights between different individuals are smaller, and therefore the opinion propagation is slow.

@@ -18,7 +18,7 @@ nRoot = 4;
 % index 1: Fake News; index 2: Real News.
 newsRange = round([0.1, 0.1]*N);
 locality = [true, true];
-similarity_level = 0:1:50;
+similarity_level = 0:1:60;
 averages = zeros(size(similarity_level,2),1);
 stds = zeros(size(similarity_level,2),1);
 t_steady = zeros(size(similarity_level,2),1);
@@ -55,13 +55,10 @@ for k=1:size(similarity_level,2)
 end
 figure;
 plot(similarity_level,averages);
-title("Similarity level vs Averages")
 figure;
 plot(similarity_level,stds);
-title("Similarity Level vs Stds")
 figure;
 plot(similarity_level,t_steady);
-title("Similarity Level vs Stds")
 %degree = 2;
 %perturbation = 'censorship';
 

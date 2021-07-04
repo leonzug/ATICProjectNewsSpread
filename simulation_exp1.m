@@ -55,10 +55,14 @@ for k=1:size(instruction_level,2)
 end
 figure;
 plot(instruction_level,averages);
-title("Instruction Level vs Average Opinion")
+%title("Instruction Level vs Average Opinion")
+xlabel("Instruction Level");
+ylabel("Average Opinion");
 figure;
 plot(instruction_level,stds);
-title("Instruction Level vs Opinions Standard Deviation")
+xlabel("Instruction Level");
+ylabel("Opinions' std");
+%title("Instruction Level vs Opinions Standard Deviation")
 %degree = 2;
 %perturbation = 'censorship';
 
