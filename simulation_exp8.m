@@ -2,7 +2,7 @@ addpath('Utilities');
 clear all;
 
 N = 100;
-timesteps = 3000;
+timesteps = 1500;
 nExperiments = 100;
 traits = {'similarity', 'influenceable','critical thinker'};
 nRealNews = 2;
@@ -18,7 +18,7 @@ nRoot = 4;
 % index 1: Fake News; index 2: Real News.
 newsRange = round([0.1, 0.1]*N);
 locality = [true, true];
-infl_polarity = 0:0.01:1;
+infl_polarity = 0:0.1:1;
 averages = zeros(size(infl_polarity,2),1);
 stds = zeros(size(infl_polarity,2),1);
 t_steady = zeros(size(infl_polarity,2),1);
@@ -66,7 +66,9 @@ plot(infl_polarity,stds);
 title("Influenceability Level vs Stds")
 figure(3);
 plot(infl_polarity,t_steady);
-title("Influenceability Level vs Time to Steady State")
+xlabel("Manipulability Level");
+ylabel("Steps to Steady State");
+%title("Influenceability Level vs Time to Steady State")
 figure(4);
 plot_names = [];
 for k=1:size(infl_polarity,2)
@@ -83,8 +85,8 @@ hold off
 %perturbation = 'censorship';
 
 
-X_average = X_average(end);
-[average_indegree] = visualize_function(A,X',nodenames,timesteps,5,step_size,true,true);
+%X_average = X_average(end);
+%[average_indegree] = visualize_function(A,X',nodenames,timesteps,5,step_size,true,true);
 
 %G = digraph(A,nodenames);
 %average_indegree = mean(indegree(G));
