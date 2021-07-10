@@ -60,10 +60,10 @@ for k=1:size(infl_polarity,2)
 end
 figure(1);
 plot(infl_polarity,averages);
-title("Influenceability level vs Averages")
+title("Averages vs Manipulability level")
 figure(2);
 plot(infl_polarity,stds);
-title("Influenceability Level vs Stds")
+title(" Stds vs Manipulability Level")
 figure(3);
 plot(infl_polarity,t_steady);
 xlabel("Manipulability Level");
