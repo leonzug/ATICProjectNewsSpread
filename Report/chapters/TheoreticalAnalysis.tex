@@ -1,4 +1,5 @@
 \section{Theoretical Analysis and Results}
+\label{sec:theoretical}
 \subsection{General Considerations}
 Without loss of generality, the labels of the nodes in the graph can be selected so that the indices referring to the fake/real news sources appear to be the last ones. Considering $n_p$ as the number of people in the network, $n_s$ as the number of fake and real news sources and $n = n_p + n_s$ the sum thereof, then $A \in \mathbb{R}^{ n \times n}$ can be partitioned as follows:
 
@@ -49,7 +50,7 @@ $$
 \subsection{$n_s \geq 2$}
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=2.5in]{Figures/condensation_digraph.png}
+	\includegraphics[width = 6cm]{Figures/condensation_digraph.png}
 	\caption{Example of a network condensation of digraph $G$. All individuals belong to a single strongly connected component $C(\tilde{G})$ (grey), there are one source of fake news (red) and two sources of real news (blue). $G$ is the digraph associated to the adjacency matrix $A$, $\tilde{G}$ is associated to $\tilde{A}$.}
 	\label{pics:condensation_digraph_example}
 \end{figure}
@@ -133,7 +134,7 @@ Therefore, in the case with only one news source, the whole network converges to
 \subsection{Population network not strongly connected}
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=2.5in]{Figures/not_strongly_connected.png}
+	\includegraphics[width=6cm]{Figures/not_strongly_connected.png}
 	\caption{Example of a not fully connected network condensation digraph. The people interactions are summarized by the respective subnetworks. There are one source of fake news (red) and two sources of real news (blue).}
 	\label{pics:nonconnectednetwork}
 \end{figure}
