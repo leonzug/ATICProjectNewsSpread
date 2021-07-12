@@ -7,4 +7,4 @@ You can replicate the results of the paper (up to the randomness introduced in t
 - Experiment about varying instruction level: "simulation_exp1.m"
 - Experiment about varying society diversity: "simulation_exp2.m"
 - Experiment about varying society manipulability: "simulation_exp8.m"
-- Experiment about polarization: " ".
+- Experiment about polarization: for one single experiment "simulation_pol_visual.m", to simulate 100 random experiments for all params combinations "simulation_polarization.m".
